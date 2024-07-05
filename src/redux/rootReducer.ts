@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import userReducer from "./slices/user";
+import forecastReducer from "./slices/forecast";
 // ----------------------------------------------------------------------
 
 const createNoopStorage = () => ({
@@ -28,6 +29,7 @@ const rootPersistConfig = {
 
 const rootReducer = combineReducers({
   user: userReducer,
+  forecast: forecastReducer,
 });
 
 export { rootPersistConfig, rootReducer };
