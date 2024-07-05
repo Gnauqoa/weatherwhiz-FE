@@ -11,12 +11,14 @@ const initialState: {
   q: string;
   days: string;
   currentSelected: string;
+  currentHourIndex: number;
 } & ReducerType = {
   q: "current",
   days: "6",
   isLoading: false,
   error: null,
   data: null,
+  currentHourIndex: 0,
   currentSelected: "current",
 };
 
@@ -44,6 +46,10 @@ const slice = createSlice({
     },
     setCurrentSelected(state, action) {
       state.currentSelected = action.payload;
+      state.currentHourIndex = 0;
+    },
+    setCurrentHourIndex(state, action) {
+      state.currentHourIndex = action.payload;
     },
   },
 });
@@ -67,5 +73,11 @@ export function getForecastData({ q, days }: { q: string; days: string }) {
 export function setCurrentSelected(id: string) {
   return async () => {
     dispatch(slice.actions.setCurrentSelected(id));
+  };
+}
+
+export function setCurrentHourIndex(index: number) {
+  return async () => {
+    dispatch(slice.actions.setCurrentHourIndex(index));
   };
 }
