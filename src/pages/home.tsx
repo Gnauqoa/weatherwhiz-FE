@@ -1,12 +1,11 @@
-import useAuth from "../hooks/useAuth";
-
-export default function HomePage() {
-  const { logout } = useAuth();
+export default function Home() {
+  
   return (
-    <div className="page">
-      <p className="text-black" onClick={logout}>
-        Home
-      </p>
+    <div className="flex flex-row w-[90%] h-[80%] rounded-[16px] relative overflow-hidden">
+      <div className="flex flex-col bg-[#fafafa] min-w-[70%] h-full"></div>
+      <div className="flex flex-col bg-[#f6f6f6] w-full h-full py-2">
+
+      </div>
     </div>
   );
 }
