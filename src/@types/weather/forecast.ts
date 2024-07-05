@@ -1,4 +1,6 @@
 import { Condition } from "./condition";
+import { Current } from "./current";
+import { Location } from "./location";
 
 export type Day = {
   maxtemp_c: number;
@@ -81,4 +83,10 @@ export type ForecastDay = {
 
 export type Forecast = {
   forecastday: ForecastDay[];
+};
+
+export type ForecastData = {
+  location: Location;
+  current: Current;
+  forecast: Forecast;
 };
