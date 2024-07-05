@@ -1,11 +1,21 @@
 import { AxiosResponse } from "axios";
 import axios from "../utils/axios";
 
-import { AddUserType, UpdatePasswordPayload, UpdateUserPayload } from "../@types/user";
-import { SignInFormProps } from "../sections/auth/login";
+import {
+  AddUserType,
+  UpdatePasswordPayload,
+  UpdateUserPayload,
+} from "../@types/user";
 
+export type SignInFormProps = {
+  email: string;
+  password: string;
+};
 export const signIn = (payload: SignInFormProps): Promise<AxiosResponse> => {
-  return axios.post("/api/v1/users/sign_in", payload);
+  return axios.post("/api/v1/users/sign_in", {
+    account: payload.email,
+    password: payload.password,
+  });
 };
 
 export const registerUser = (payload: AddUserType): Promise<AxiosResponse> => {
