@@ -6,10 +6,10 @@ export default function Home() {
   const { search } = useForecast();
 
   useEffect(() => {
-    search("London", "1");
+    search("London", "6");
   }, []);
   return (
-    <div className="flex flex-row w-[90%] h-[80%] rounded-[16px] relative overflow-hidden">
+    <div className="flex flex-row w-[90%] h-[70%] rounded-[16px] relative overflow-hidden">
       <div className="flex flex-col bg-[#fafafa] min-w-[70%] h-full py-8 px-20">
         <FirstSection />
       </div>
