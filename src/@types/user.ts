@@ -4,6 +4,9 @@ export type AddUserType = {
   first_name: string;
   last_name: string;
   password: string;
+  confirm_password: string;
+  phone: string;
+  birth: string;
 };
 
 export type UserTypeNotNull = {
