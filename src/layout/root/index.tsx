@@ -1,15 +1,14 @@
 import { Outlet } from "react-router-dom";
-import AuthProvider from "./provider";
+import RootProvider from "./provider";
 
-
-const AuthLayout = () => {
+const RootLayout = () => {
   return (
     <div className="flex flex-col w-full h-screen overflow-auto justify-center items-center bg-[#E9E9E9]">
-      <AuthProvider>
+      <RootProvider>
         <Outlet />
-      </AuthProvider>
+      </RootProvider>
     </div>
   );
 };
 
-export default AuthLayout;
+export default RootLayout;

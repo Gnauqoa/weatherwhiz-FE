@@ -1,5 +1,5 @@
 import { getToken, saveToken } from "./local-storage";
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 const interceptors = {
   request: [
@@ -17,7 +17,6 @@ const interceptors = {
   ],
   response: [
     async (response: AxiosResponse) => {
-      console.log(response.config.url);
       if (
         "/api/v1/users/sign_in" === response.config.url ||
         "/api/v1/users" === response.config.url
@@ -32,7 +31,6 @@ const interceptors = {
       if (error.response?.status === 401) {
         if (error.response.config.url !== "/api/v1/users/current") {
         }
-        // window.location.href = pathPage.login;
       }
       throw error;
     },

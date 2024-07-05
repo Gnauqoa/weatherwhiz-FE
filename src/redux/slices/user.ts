@@ -6,10 +6,11 @@ import { getCurrentUser } from "../../apis/auth";
 
 // ----------------------------------------------------------------------
 
-const initialState: { user: UserType } & ReducerType = {
-  isLoading: true,
+const initialState: { user: UserType } & ReducerType & { init: boolean } = {
+  isLoading: false,
   error: null,
   user: null,
+  init: false,
 };
 
 const slice = createSlice({
@@ -29,12 +30,14 @@ const slice = createSlice({
     // GET User
     getUserDetailSuccess(state, action) {
       state.isLoading = false;
+      state.init = true;
       state.user = { ...action.payload };
     },
 
     // SET User
     setUserDetailSuccess(state, action: { payload: UserType }) {
       state.isLoading = false;
+      state.init = true;
       if (!action.payload) state.user = null;
       else state.user = { ...action.payload };
     },

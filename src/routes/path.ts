@@ -1,4 +1,4 @@
 export const pathPage = {
   root: "/",
-  login: "/login",
+  login: "/auth/login/",
 };

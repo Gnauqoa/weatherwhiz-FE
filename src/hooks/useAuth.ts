@@ -4,14 +4,23 @@ import { removeToken } from "../utils/local-storage";
 import { getUserDetail, setUser } from "../redux/slices/user";
 import { SignInFormProps, signIn } from "../apis/auth";
 import { toast } from "react-toastify";
+import { useCallback } from "react";
 
 const useAuth = () => {
-  const { isLoading, user } = useSelector((state) => state.user);
+  const { isLoading, user, init } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const logout = () => {
     removeToken();
     dispatch(setUser(null));
     axios.defaults.headers.common["Authorization"] = null;
+  };
+  const initUser = useCallback(() => {
+    if (!init && !isLoading) {
+      dispatch(getUserDetail());
+    }
+  }, [init, isLoading, dispatch]);
+  const getUser = () => {
+    if (!isLoading) dispatch(getUserDetail());
   };
   const login = async (data: SignInFormProps) => {
     try {
@@ -30,10 +39,17 @@ const useAuth = () => {
       });
     }
   };
-  if (isLoading || !user)
-    return { logout, login, isAuth: false, user, isLoading };
 
-  return { logout, login, isAuth: true, user, isLoading };
+  return {
+    logout,
+    login,
+    getUser,
+    initUser,
+    init,
+    isAuth: isLoading || !user ? false : true,
+    user,
+    isLoading,
+  };
 };
 
 export default useAuth;
