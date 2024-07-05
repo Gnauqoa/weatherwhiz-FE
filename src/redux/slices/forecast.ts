@@ -10,12 +10,14 @@ const initialState: {
   data: ForecastData | null;
   q: string;
   days: string;
+  currentSelected: string;
 } & ReducerType = {
   q: "current",
-  days: "1",
+  days: "6",
   isLoading: false,
   error: null,
   data: null,
+  currentSelected: "current",
 };
 
 const slice = createSlice({
@@ -40,6 +42,9 @@ const slice = createSlice({
       state.q = action.payload.q;
       state.days = action.payload.days;
     },
+    setCurrentSelected(state, action) {
+      state.currentSelected = action.payload;
+    },
   },
 });
 
@@ -53,9 +58,14 @@ export function getForecastData({ q, days }: { q: string; days: string }) {
     dispatch(slice.actions.setQueryData({ q, days }));
     try {
       const { data } = await getForecastAPI({ q, days });
-      dispatch(slice.actions.setForecastData(data));
+      dispatch(slice.actions.setForecastData(data.data));
     } catch (err) {
       dispatch(slice.actions.hasError(err));
     }
+  };
+}
+export function setCurrentSelected(id: string) {
+  return async () => {
+    dispatch(slice.actions.setCurrentSelected(id));
   };
 }
