@@ -4,13 +4,10 @@ import { Provider as ReduxProvider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import ThemeProvider from "./theme";
 import { store } from "./redux/store";
-import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import "./index.css";
 import ToastContainer from "./config/toast";
 import "react-toastify/dist/ReactToastify.css";
-import AuthProvider from "./config/auth";
-
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -18,14 +15,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
-        <ThemeProvider>
-          <ToastContainer />
-          <Router>
-            <AuthProvider>
-              <App />
-            </AuthProvider>
-          </Router>
-        </ThemeProvider>
+      <ThemeProvider>
+        <ToastContainer />
+        <App />
+      </ThemeProvider>
     </ReduxProvider>
   </React.StrictMode>
 );
