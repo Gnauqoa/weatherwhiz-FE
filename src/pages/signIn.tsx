@@ -31,7 +31,7 @@ const SignIn = () => {
   const { handleSubmit } = methods;
 
   return (
-    <div className="bg-[#FAFAFA] px-6 py-8 rounded-[12px] w-[30%]">
+    <div className="flex flex-col gap-4 bg-[#FAFAFA] px-6 py-8 rounded-[12px] w-[30%]">
       <div className="w-full flex flex-col items-center">
         <Logo />
       </div>
@@ -55,7 +55,9 @@ const SignIn = () => {
           <Button
             type="submit"
             sx={{
+              borderRadius: "8px",
               mt: 3,
+              py: 1.5,
               bgcolor: "#101010",
               color: "#fff",
               fontWeight: 600,
@@ -68,7 +70,9 @@ const SignIn = () => {
           </Button>
           <p className="text-[#101010] text-center pt-4">
             Don't have an account?{" "}
-            <Link to={pathPage.register} className="font-[600]">Sign up</Link>
+            <Link to={pathPage.register} className="font-[600]">
+              Sign Up
+            </Link>
           </p>
         </div>
       </FormProvider>
