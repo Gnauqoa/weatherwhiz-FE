@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import ForgotPassword from "./components/auth/ForgotPassword";
 import HomePage from "./pages/home";
 import AuthLayout from "./layout/auth";
 import SignIn from "./pages/signIn";
@@ -15,7 +14,6 @@ function App() {
         </Route>
         <Route path="/auth" element={<AuthLayout />}>
           <Route path="login" element={<SignIn />} />
-          <Route path="forgotPassword" element={<ForgotPassword />} />
         </Route>
       </Routes>
     </Router>
