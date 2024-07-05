@@ -1,4 +1,3 @@
-import { pathPage } from "../routes/path";
 import { getToken, saveToken } from "./local-storage";
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
@@ -6,7 +5,6 @@ const interceptors = {
   request: [
     (config: AxiosRequestConfig) => {
       const token = getToken();
-      console.log("get token: ", token);
       if (token) {
         config = {
           ...config,
