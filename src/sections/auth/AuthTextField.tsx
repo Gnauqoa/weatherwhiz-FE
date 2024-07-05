@@ -12,7 +12,7 @@ const AuthTextField = ({
 }: RFFTextFieldProps): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <div>
+    <div className="gap-2 flex flex-col">
       {label && (
         <Typography
           sx={{
@@ -25,6 +25,7 @@ const AuthTextField = ({
         </Typography>
       )}
       <RHFTextField
+        // autoComplete={""}
         InputProps={{
           endAdornment:
             type === "password" ? (
