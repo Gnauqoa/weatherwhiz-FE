@@ -12,7 +12,7 @@ const AuthTextField = ({
 }: RFFTextFieldProps): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <div className="gap-2 flex flex-col">
+    <div className="gap-2 flex flex-col w-full">
       {label && (
         <Typography
           sx={{
@@ -47,7 +47,7 @@ const AuthTextField = ({
             fontSize: 12,
             borderRadius: "8px",
             borderWidth: 1,
-            borderColor: "#E9E9E9",
+            borderColor: "#1d1d1d",
             "& > input": {
               color: "#101010",
             },
