@@ -14,10 +14,10 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     dispatch(getUserDetail());
   }, []);
   useEffect(() => {
-    if (isAuth && location.pathname === "/login") {
+    if (isAuth && location.pathname === "/auth/login/") {
       navigate(pathPage.root);
     }
-  }, [location.pathname]);
+  }, [location.pathname, isAuth]);
   useEffect(() => {}, []);
   return <>{children}</>;
 };
