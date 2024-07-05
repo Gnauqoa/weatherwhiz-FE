@@ -10,5 +10,5 @@ export type getForecastParams = {
 export const getForecastAPI = (
   params: getForecastParams
 ): Promise<AxiosResponse<DataResponseType<ForecastData>>> => {
-  return axios.get("/weather/forecast", { params });
+  return axios.get("/api/v1/weather/forecast", { params });
 };
