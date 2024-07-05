@@ -1,0 +1,994 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --spotify-green: #1db954;
+  --spotify-green-bright: #1ed760;
+  --main-text: #b3b3b3;
+  --player-height: 90px;
+  --side-bar-margin: 24px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+  z-index: 0;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  padding: 1px;
+  background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #5a5a5a;
+  width: 12px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+}
+
+body {
+  font-size: 13px;
+  line-height: 20px;
+  letter-spacing: 0.015em;
+  color: var(--main-text);
+  text-transform: none;
+  font-family: "Rubik", "Poppins", "Nunito", "Open Sans", "Roboto",
+    "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic Pro", "Meiryo",
+    "MS Gothic", sans-serif;
+}
+
+.App {
+  height: 100vh;
+  width: 100vw;
+  display: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: auto 1fr;
+  overflow: hidden;
+}
+
+.sidebar {
+  background: #040404;
+  width: 232px;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+.nav-list {
+  list-style: none;
+}
+
+.NavItem {
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+.NavItem:hover > .nav-link {
+  color: #fff;
+}
+
+.nav-link {
+  color: var(--main-text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 16px;
+  font-weight: bold;
+  transition: all 0.3s;
+  border-radius: 4px;
+}
+
+.activeMainNav {
+  background: #282828;
+  color: #fff;
+}
+
+.nav-icon {
+  margin-right: 16px;
+  height: 24px;
+}
+
+.playlists {
+  margin-top: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 234px;
+}
+
+.play-title {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0 var(--side-bar-margin) 12px var(--side-bar-margin);
+}
+
+.create-button {
+  border: none;
+  background: transparent;
+  padding: 5px var(--side-bar-margin);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: var(--main-text);
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+.create-button:hover {
+  color: white;
+}
+
+.create-button > div > .icon {
+  transition: all 0.4s;
+}
+
+.playlist-icon {
+  margin-right: 16px;
+}
+
+.featured-label {
+  font-weight: 700;
+  line-height: 16px;
+  font-size: 16px;
+}
+
+.featured-item {
+  transition: all 0.4s;
+}
+
+.featured-item-link {
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  padding: 5px var(--side-bar-margin);
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.4s;
+}
+
+.featured-item:hover > .featured-item-link {
+  opacity: 1;
+}
+
+.list-separator {
+  margin: 8px var(--side-bar-margin) 8px var(--side-bar-margin);
+  background-color: #282828;
+  border: none;
+  height: 1px;
+}
+
+.other-playlist-container {
+  margin: 4px 0;
+  overflow: hidden;
+  flex: 1;
+  min-height: 100px;
+  max-height: min-content;
+  overflow-y: auto;
+}
+
+.other-list {
+  position: relative;
+  list-style: none;
+  height: 0;
+  white-space: nowrap;
+}
+
+.side-list {
+  margin: 0 var(--side-bar-margin);
+}
+
+.list-link {
+  color: var(--main-text);
+  text-decoration: none;
+  height: 32px;
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: 500;
+  overflow: hidden;
+  cursor: default;
+}
+
+.list-link:hover {
+  color: #fff;
+}
+
+.list-wrapper {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+/* .connect-devices-wrapper > button {
+    position: absolute
+} */
+
+.featured {
+  background: #121212;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.header-bar {
+  width: 100%;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.5);
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.HistoryNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navButton {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+.SearchContainer {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.SearchBar {
+  position: relative;
+  flex: 0 1 364px;
+  color: #121212;
+}
+
+.SearchInput {
+  color: #000;
+  padding: 6px 48px;
+  height: 40px;
+  width: 100%;
+  border: 0;
+  border-radius: 500px;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.015em;
+}
+
+.UserPrompt {
+  white-space: nowrap;
+}
+
+.PromptButton {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 700;
+  letter-spacing: 1.76px;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  border-radius: 500px;
+  color: #fff;
+  transition: all 33ms cubic-bezier(0.3, 0, 0, 1);
+  white-space: nowrap;
+  padding: 8px 34px;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+
+.PromptButton:hover {
+  transform: scale(1.05);
+}
+
+.page-content {
+  padding: 0 32px;
+  max-width: 1955px;
+  z-index: 3;
+}
+
+.pageContent {
+  padding: 16px 0;
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: 1fr;
+  grid-gap: 32px;
+}
+
+.CollectionRow {
+  width: 100%;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+}
+
+.RowTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.seeAll {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  color: #b3b3b3;
+}
+
+.seeAll:hover {
+  text-decoration: underline;
+}
+
+.RowGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(164px, 1fr));
+  grid-template-rows: 1fr;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  grid-gap: 16px;
+  z-index: 3;
+}
+
+.PlayCard {
+  background: #272727;
+  padding: 20px 20px 16px;
+  border-radius: 8px;
+  width: 100%;
+  height: min-content;
+  cursor: pointer;
+  z-index: 3;
+  position: relative;
+}
+
+.smallButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--spotify-green);
+  color: #fff;
+  border: 0;
+  border-radius: 50%;
+  margin: 0;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 16px;
+  margin-right: 20px;
+  z-index: 3;
+  display: none;
+}
+
+.smallButton:hover {
+  transform: scale(1.06);
+}
+
+.smallButton:active {
+  transform: scale(1);
+}
+
+.pcWrapper {
+  position: relative;
+  user-select: none;
+}
+
+.pcWrapper:hover .smallButton {
+  display: flex;
+}
+
+.CardDisplay {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  margin-bottom: 16px;
+  background-color: transparent;
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.previewImg {
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.CardInfo {
+  height: 66px;
+}
+
+.browsePage {
+  color: #fff;
+  margin-top: 16px;
+  padding: 16px 0;
+}
+
+.browseGrid {
+  margin: 16px 0;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(164px, 1fr));
+  grid-auto-rows: auto;
+}
+
+.browseLinkContainer {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  border-radius: 8px;
+}
+
+.browseLinkContainer::after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.browseLink {
+  position: absolute;
+  width: 100%;
+  color: #fff;
+  text-decoration: none;
+}
+
+.GenrePage {
+  padding-top: 16px;
+}
+
+.listPage {
+  margin-top: -60px;
+  padding-bottom: 32px;
+}
+
+.banner {
+  max-height: 500px;
+  min-height: 340px;
+  height: 30vh;
+  color: #fff;
+  position: relative;
+  padding: 0 32px 24px;
+  display: flex;
+  overflow: hidden;
+  align-items: flex-end;
+}
+
+.bannerOverlay {
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  bottom: 0;
+}
+
+.bannerImgDiv {
+  margin-right: 24px;
+  width: 192px;
+  height: 192px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  min-width: 192px;
+  background-color: #282828;
+  color: #7f7f7f;
+  box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+}
+
+.bannerImg {
+  width: 100%;
+  min-width: 192px;
+  object-fit: cover;
+  object-position: center center;
+  z-index: 3;
+}
+
+.circleDiv {
+  border-radius: 50%;
+}
+
+.bannerInfo {
+  z-index: 1;
+  display: flex;
+  flex-flow: column;
+}
+
+.pageTitle {
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.bannerTitle {
+  padding: 0.08em 0px;
+  font-size: 48px;
+  line-height: 48px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.bannerTitleXL {
+  padding: 0.08em 0px;
+  font-size: 48px;
+  line-height: 60px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.bannerDescription {
+  color: hsla(0, 0%, 100%, 0.7);
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.additionalInfo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.additionalInfo > a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.additionalInfo > a:hover {
+  text-decoration: underline;
+}
+
+.additionalInfo > h2 {
+  color: hsla(0, 0%, 100%, 0.7);
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.additionalInfo :not(:first-child)::before {
+  content: "•";
+  margin: 0 4px;
+  display: inline-block;
+}
+
+.playListContent {
+  position: relative;
+}
+
+.playListOverlay {
+  height: 232px;
+  width: 100%;
+  position: absolute;
+  z-index: 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), #121212);
+}
+
+.playListFunctions {
+  display: flex;
+  position: relative;
+  padding: 24px 32px;
+  width: 100%;
+  align-items: center;
+  z-index: 1;
+}
+
+.playListFunctions :not(:last-child) {
+  margin-right: 24px;
+}
+
+.playListFunctions > :first-child {
+  margin-right: 32px;
+}
+
+.followButton {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  background-color: transparent;
+  padding: 7px 15px;
+  border: 1px solid hsla(0, 0%, 100%, 0.3);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.followButton:hover {
+  border-color: #fff;
+}
+
+.playButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: var(--spotify-green);
+  color: #fff;
+  border: 0;
+  border-radius: 50%;
+  margin-right: 32px;
+}
+
+.playButton:hover {
+  transform: scale(1.05);
+}
+
+.likeButton {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 0;
+  color: hsla(0, 0%, 100%, 0.7);
+}
+
+.likeButton:not(.noHover):hover {
+  color: #fff;
+}
+
+.moreButton {
+  width: 32px;
+  height: 20px;
+  background: transparent;
+  border: 0;
+  color: hsla(0, 0%, 100%, 0.7);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.moreButton:hover {
+  color: #fff;
+}
+
+.trackListContainer {
+  position: relative;
+}
+
+.trackList {
+  width: 100%;
+  margin-bottom: 1.5em;
+}
+
+.trackListItem {
+  height: 4.56em;
+  position: relative;
+  transition: background-color 0.2s linear;
+  list-style-type: none;
+  user-select: none;
+  display: flex;
+}
+
+.trackListItem:hover {
+  background-color: hsla(0, 0%, 100%, 0.1);
+}
+
+.trackItemPlay {
+  box-sizing: border-box;
+  position: relative;
+  text-align: right;
+  padding-right: 1em;
+  width: 42px;
+}
+
+.trackItemThumb {
+  background-color: #282828;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin-right: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.trackMidAlign {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.itemIcon {
+  padding-top: 3px;
+  color: #fff;
+  opacity: 0.6;
+}
+
+.hoverIcon {
+  display: none;
+  color: #fff;
+  z-index: 3;
+  background: none;
+  border: none;
+  margin: 0;
+}
+
+.trackTopAlign {
+  margin-top: 0.75em;
+}
+
+.trackListItem:hover .itemIcon {
+  display: none;
+}
+
+.trackListItem:hover .hoverIcon {
+  display: inline-block;
+}
+
+.trackItemInfo {
+  flex: 1 1 0;
+  overflow: hidden;
+}
+
+.ellipsis-one-line {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.trackName {
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.015em;
+  color: #fff;
+}
+
+.trackInfo {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.explicit-label {
+  margin-right: 0.67em;
+  margin-left: 0.1em;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: hsla(0, 0%, 100%, 0.6);
+  color: #121212;
+  border-radius: 2px;
+  text-transform: uppercase;
+  font-size: 9px;
+  line-height: 10px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 2px;
+}
+
+.trackArtists > a {
+  color: #fff;
+  opacity: 0.6;
+  transition: opacity 0.2s linear;
+  text-decoration: none;
+}
+
+.trackArtists > a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.trackArtists > a:not(:last-child)::after {
+  content: ",\00a0";
+  display: inline-block;
+}
+
+.trackInfoSep {
+  color: #fff;
+  opacity: 0.6;
+  display: inline-block;
+  transform: translateY(-1px);
+  font-size: 0.8em;
+  padding: 0 8px;
+}
+
+.trackAlbum > a {
+  color: #fff;
+  opacity: 0.6;
+  transition: opacity 0.2s linear;
+  text-decoration: none;
+}
+
+.trackAlbum > a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.trackItemDuration {
+  text-align: right;
+  padding-right: 1em;
+  font-feature-settings: "tnum";
+  letter-spacing: 0;
+  width: 3.9em;
+}
+
+.duration {
+  color: #fff;
+  opacity: 0.6;
+}
+
+.no-outline:focus {
+  outline: none;
+}
+
+.menuNavList {
+  text-align: left;
+  list-style: none;
+}
+
+.AboutNavItem {
+  display: inline-block;
+}
+
+.aboutLink {
+  margin: 0 8px 0 0;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.aboutLink-active {
+  background-color: #333;
+}
+
+.ArtistRowGrid {
+  display: grid;
+  grid-gap: 35px 16px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-rows: 1fr;
+}
+
+.artistRowThumb {
+  background-color: #282828;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.artistRowThumb::after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.artistRowName {
+  margin: 12px 0 4px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  display: block;
+}
+
+.artistRowName > a {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.015em;
+  font-weight: 700;
+  color: #fff;
+  text-transform: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.artistRowName > a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 1024px) {
+  .bannerTitle {
+    font-size: 72px;
+    line-height: 72px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .bannerImgDiv {
+    width: 232px;
+    height: 232px;
+  }
+
+  .bannerTitle {
+    font-size: 96px;
+    line-height: 96px;
+  }
+}
+
+@media (min-width: 1710px) {
+  .bannerTitleXL {
+    font-size: 72px;
+    line-height: 72px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .mediaNone {
+    display: none;
+  }
+
+  .header-bar {
+    padding: 16px;
+  }
+}
+.hide-scrollbars {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.ios-scrollbar {
+  ::-webkit-scrollbar-track {
+    border-radius: 0.125rem;
+    background-color: lightgray;
+  }
+  ::-webkit-scrollbar {
+    width: 0.25rem;
+    border-radius: 0.125rem;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0.125rem;
+    background-color: gray;
+  }
+}
+
+.trackMoreButton {
+  background: transparent;
+  border: 0;
+  color: hsla(0, 0%, 100%, 0.7);
+  cursor: pointer;
+}
+
+.trackMoreButton:hover {
+  color: #fff;
+}

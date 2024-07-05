@@ -1,0 +1,196 @@
+.NavBarStyle {
+  padding: 20px 50px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  color: black;
+  background-color: #121212;
+}
+
+.Logo {
+  width: 150px;
+  height: 45px;
+  object-fit: cover;
+  display: block;
+  left: 0;
+  right: 0;
+  align-items: center;
+}
+
+.SocialIconsPage {
+  padding-top: 100px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  display: block;
+  align-items: center;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+.hint {
+  text-align: center;
+  font-size: 15px;
+}
+
+.OR,
+.OR-2 {
+  width: 30%;
+  margin: 20px auto 10px;
+  text-align: center;
+  border-top: 1px solid;
+}
+
+.OR i {
+  padding: 0 10px;
+  background: rgb(0, 0, 0);
+  position: relative;
+  top: -11px;
+  z-index: 1;
+}
+
+.OR-2 {
+  width: 50%;
+}
+
+.or-seperator,
+.or-seperator-2 {
+  width: 30%;
+  margin: 20px auto 10px;
+  text-align: center;
+  border-top: 1px solid rgb(255, 255, 255);
+}
+
+.or-seperator i {
+  padding: 0 10px;
+  background: rgb(0, 0, 0);
+  position: relative;
+  top: -11px;
+  z-index: 1;
+  background-color: #111113;
+}
+
+.SignUpForm {
+  max-width: 400px;
+  min-width: 30vw;
+  border-color: var(--spotify-green);
+  text-align: justify;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.FormElement {
+  border-color: var(--spotify-green);
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+input.FormElement {
+  border-color: var(--spotify-green);
+}
+
+select.FormElement.form-col.custom-select {
+  border-color: var(--spotify-green);
+}
+
+input.FormElement {
+  height: 50px;
+}
+
+select.FormElement.form-col.custom-select {
+  height: 50px;
+}
+
+.SignUpSubmit {
+  width: 100%;
+  color: #ffffff;
+  background-color: var(--spotify-green);
+  border-radius: 50px;
+  border: 0;
+  height: 48px;
+  margin-top: 7px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  display: block;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.SignUpSubmit:hover {
+  color: #ffffff;
+  background-color: var(--spotify-green-bright);
+  transition: 1s;
+  text-decoration: none;
+}
+
+.SignUpSubmit:active {
+  color: #ffffff;
+  background-color: #169c46 !important;
+  border: 0;
+}
+
+.showText:not(:hover) {
+  box-shadow: none !important;
+  transition: 1s;
+}
+
+.googlelogin {
+  width: 10%;
+  margin: 10px auto auto;
+}
+
+.showText {
+  background-color: white !important;
+  border-color: var(--spotify-green) !important;
+  box-shadow: white !important;
+}
+
+.showText:hover {
+  background-color: var(--spotify-green-bright) !important;
+  border-color: var(--spotify-green-bright) !important;
+  box-shadow: none !important;
+  transition: 1s;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group input {
+  width: 90%;
+}
+
+.input-group button {
+  position: absolute;
+  right: 0px;
+  top: 40%;
+  transform: translateY(-50%);
+}
+
+.forgetLink {
+  margin: 10px 0px;
+  text-align: right;
+}
+
+.forgetPage {
+  margin-top: 100px;
+}
+
+.pass-reset {
+  color: #f9b835;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.pass-message {
+  padding-bottom: 30px;
+  line-height: inherit;
+}
