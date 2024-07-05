@@ -2,7 +2,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { FormProvider } from "../../../components/hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signIn } from "../../../apis/auth";
+import { SignInFormProps, signIn } from "../../../apis/auth";
 import AuthTextField from "../AuthTextField";
 import { LoadingButton } from "@mui/lab";
 import { toast } from "react-toastify";
@@ -14,16 +14,13 @@ import { setUser } from "../../../redux/slices/user";
 import axios from "../../../utils/axios";
 import { Typography } from "@mui/material";
 
-export type SignInFormProps = {
-  account: string;
-  password: string;
-};
+
 export const defaultValues: SignInFormProps = {
-  account: "",
+  email: "",
   password: "",
 };
 export const LoginSchema = yup.object().shape({
-  account: yup.string().required("Please enter your account"),
+  email: yup.string().required("Please enter your account"),
   password: yup.string().required("Please enter your password"),
 });
 

@@ -14,6 +14,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     dispatch(getUserDetail());
   }, []);
   useEffect(() => {
+    console.log({ isAuth, location });
     if (isAuth && location.pathname === "/auth/login/") {
       navigate(pathPage.root);
     }

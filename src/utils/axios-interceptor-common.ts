@@ -1,5 +1,5 @@
 import { getToken, saveToken } from "./local-storage";
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 const interceptors = {
   request: [
@@ -17,6 +17,7 @@ const interceptors = {
   ],
   response: [
     async (response: AxiosResponse) => {
+      console.log(response.config.url);
       if (
         "/api/v1/users/sign_in" === response.config.url ||
         "/api/v1/users" === response.config.url
