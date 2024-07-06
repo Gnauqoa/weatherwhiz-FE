@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/home";
+import HomePage from "./page/home";
 import AuthLayout from "./layout/auth";
 import { BrowserRouter as Router } from "react-router-dom";
 import RootLayout from "./layout/root";
-import SignUp from "./pages/signup";
-import SignIn from "./pages/signin";
+import SignUp from "./page/signup";
+import SignIn from "./page/signin";
 
 
 function App() {
