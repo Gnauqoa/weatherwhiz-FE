@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import useForecast from "../../../hooks/useForecast";
 import wind from "../../../assets/wind.svg";
 import drink from "../../../assets/drink.svg";
+import useAuth from "../../../hooks/useAuth";
 
 const currentHour = dayjs().hour();
 let greeting = "";
@@ -12,14 +13,15 @@ else greeting = "Good evening";
 
 const CurrentWeather = () => {
   const { hourSelected } = useForecast();
-  if (!hourSelected) return <></>;
+  const { user } = useAuth();
+  if (!hourSelected || !user) return <></>;
   return (
     <div className="flex flex-col w-full h-[50%] items-center py-4 gap-3">
-      <Typography sx={{ color: "#060606", fontSize: 30 }}>
-        {greeting}
+      <Typography sx={{ color: "#060606", fontSize: 30, fontWeight: 300 }}>
+        {greeting},<span className="font-[600]">{user.last_name}</span>
       </Typography>
       <Typography sx={{ color: "#060606", fontSize: 30 }}>
-        {dayjs().format("h:mm A")}
+        {dayjs(hourSelected.time).format("h:mm A")}
       </Typography>
       <div className="flex flex-col items-center w-full justify my-auto gap-3">
         <div className="flex flex-row gap-4  items-center">

@@ -11,30 +11,40 @@ import useForecast from "../../../hooks/useForecast";
 
 const Header = () => {
   return (
-    <div className="flex flex-row items-center w-full">
+    <div className="flex flex-row gap-1 items-center w-full">
       <Search />
-      <div className="ml-auto">
-        <Day />
-      </div>
+      <Day />
     </div>
   );
 };
 const Day = () => {
-  const [value, setValue] = useState("1"); // Initial value set to 1
-
+  const { toggle, onOpen, onClose } = useToggle();
+  const { search, days, q } = useForecast();
+  if (toggle)
+    return (
+      <div>
+        <Select
+          sx={{ color: "#101010", fontSize: 28 }}
+          value={days}
+          onChange={(event) => {
+            search(q, event.target.value);
+            onClose();
+          }}
+        >
+          {[...Array(14)].map((_, index) => (
+            <MenuItem key={index + 1} value={index + 1}>
+              {index + 1}
+            </MenuItem>
+          ))}
+        </Select>
+      </div>
+    );
   return (
-    <Select
-      sx={{ color: "#101010", fontSize: 28 }}
-      value={value}
-      defaultValue={"1"}
-      onChange={(event) => setValue(event.target.value)}
-    >
-      {[...Array(14)].map((_, index) => (
-        <MenuItem key={index + 1} value={index + 1}>
-          {index + 1}
-        </MenuItem>
-      ))}
-    </Select>
+    <div onClick={onOpen} className="cursor-pointer">
+      <Typography sx={{ fontSize: 28, fontWeight: 300, color: "#101010" }}>
+        in <span className="font-[600]">{days}</span> days
+      </Typography>
+    </div>
   );
 };
 const Search = () => {
@@ -80,11 +90,11 @@ const Search = () => {
       <Typography
         sx={{
           fontSize: 28,
-          fontWeight: 600,
+          fontWeight: 300,
           color: "#101010",
         }}
       >
-        {q}
+        Weather in <span className="font-[600]">{q}</span>
       </Typography>
     </div>
   );
