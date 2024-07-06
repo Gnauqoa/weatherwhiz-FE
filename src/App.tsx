@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import RootLayout from "./layout/root";
 import SignUp from "./pages/signUp";
 
+
 function App() {
   return (
     <Router>
