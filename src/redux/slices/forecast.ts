@@ -3,6 +3,7 @@ import { dispatch } from "../store";
 import { ReducerType } from "../../@types/request";
 import { ForecastData } from "../../@types/weather/forecast";
 import { getForecastAPI } from "../../apis/weather";
+import dayjs from "dayjs";
 
 // ----------------------------------------------------------------------
 
@@ -39,6 +40,7 @@ const slice = createSlice({
     setForecastData(state, action) {
       state.isLoading = false;
       state.data = action.payload;
+      state.currentHourIndex = dayjs().hour();
     },
     setQueryData(state, action) {
       state.q = action.payload.q;
@@ -46,7 +48,9 @@ const slice = createSlice({
     },
     setCurrentSelected(state, action) {
       state.currentSelected = action.payload;
-      state.currentHourIndex = 0;
+      if (action.payload === "current") {
+        state.currentHourIndex = dayjs().hour();
+      } else state.currentHourIndex = 0;
     },
     setCurrentHourIndex(state, action) {
       state.currentHourIndex = action.payload;
