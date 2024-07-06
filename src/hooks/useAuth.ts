@@ -14,6 +14,7 @@ const useAuth = () => {
     removeToken();
     dispatch(setUser(null));
     axios.defaults.headers.common["Authorization"] = null;
+    toast("Logout success", { type: "success" });
   };
   const initUser = useCallback(() => {
     if (!init && !isLoading) {
