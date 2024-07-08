@@ -2,14 +2,36 @@ import axios from "axios";
 import { useDispatch, useSelector } from "../redux/store";
 import { removeToken } from "../utils/local-storage";
 import { getUserDetail, setUser } from "../redux/slices/user";
-import { SignInFormProps, registerUser, signIn } from "../apis/auth";
+import {
+  SendVerifyCodeFormProps,
+  SignInFormProps,
+  VerifyEmailFormProps,
+  registerUser,
+  sendVerifyCodeAPI,
+  signIn,
+  verifyEmail,
+} from "../apis/auth";
 import { toast } from "react-toastify";
 import { useCallback } from "react";
 import { AddUserType } from "../@types/user";
+import { useNavigate } from "react-router-dom";
+import { pathPage } from "../routes/path";
+import useToggle from "./useToggle";
 
 const useAuth = () => {
   const { isLoading, user, init } = useSelector((state) => state.user);
+  const {
+    toggle: isVerify,
+    onClose: onVerified,
+    onOpen: onVerifying,
+  } = useToggle();
+  const {
+    toggle: isSendVerifyCode,
+    onClose: onSended,
+    onOpen: onSending,
+  } = useToggle();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const logout = useCallback(
     (isToast: boolean = true) => {
@@ -20,7 +42,53 @@ const useAuth = () => {
     },
     [dispatch]
   );
-
+  const sendVerifyCode = useCallback(
+    async (payload: SendVerifyCodeFormProps) => {
+      try {
+        onSending();
+        await sendVerifyCodeAPI(payload);
+        onSended();
+        toast("Send verify code success! Please check your mail box.", {
+          type: "success",
+        });
+      } catch (err) {
+        const multipleErrors = (err as any).response?.data?.error?.errors;
+        onSended();
+        toast(
+          multipleErrors
+            ? (err as any).response?.data?.error?.errors.join(".")
+            : (err as any).response?.data?.error,
+          {
+            type: "error",
+          }
+        );
+      }
+    },
+    [onSended, onSending]
+  );
+  const verify = useCallback(
+    async (payload: VerifyEmailFormProps) => {
+      try {
+        onVerifying();
+        await verifyEmail(payload);
+        onVerified();
+        toast("Verify email success! Please login.", { type: "success" });
+        navigate(pathPage.login);
+      } catch (err) {
+        const multipleErrors = (err as any).response?.data?.error?.errors;
+        onVerified();
+        toast(
+          multipleErrors
+            ? (err as any).response?.data?.error?.errors.join(".")
+            : (err as any).response?.data?.error,
+          {
+            type: "error",
+          }
+        );
+      }
+    },
+    [navigate, onVerified, onVerifying]
+  );
   const initUser = useCallback(() => {
     if (!init && !isLoading) {
       dispatch(getUserDetail());
@@ -65,9 +133,13 @@ const useAuth = () => {
   return {
     logout,
     login,
+    verify,
     getUser,
     initUser,
     register,
+    sendVerifyCode,
+    isSendVerifyCode,
+    isVerify,
     init,
     isAuth: isLoading || !user ? false : true,
     user,

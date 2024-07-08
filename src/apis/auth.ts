@@ -11,6 +11,13 @@ export type SignInFormProps = {
   email: string;
   password: string;
 };
+export type VerifyEmailFormProps = {
+  code: string;
+  user_id: string;
+};
+export type SendVerifyCodeFormProps = {
+  user_id: string;
+}
 export const signIn = (payload: SignInFormProps): Promise<AxiosResponse> => {
   return axios.post("/api/v1/users/sign_in", {
     account: payload.email,
@@ -28,10 +35,20 @@ export const getCurrentUser = (): Promise<AxiosResponse> => {
 export const updateProfile = (
   payload: UpdateUserPayload
 ): Promise<AxiosResponse> => {
-  return axios.put("/v1/users/current", payload);
+  return axios.put("/api/v1/users/current", payload);
 };
 export const changePassword = (
   payload: UpdatePasswordPayload
 ): Promise<AxiosResponse> => {
-  return axios.put("/v1/users/current/password", payload);
+  return axios.put("/api/v1/users/current/password", payload);
 };
+
+export const verifyEmail = (
+  payload: VerifyEmailFormProps
+): Promise<AxiosResponse> => {
+  return axios.put(`/api/v1/users/verify/${payload.user_id}/${payload.code}`);
+};
+
+export const sendVerifyCodeAPI = (payload: SendVerifyCodeFormProps) => {
+  return axios.post(`/api/v1/users/verify/${payload.user_id}`)
+}

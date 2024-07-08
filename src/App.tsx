@@ -5,8 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import RootLayout from "./layout/root";
 import SignUp from "./page/signup";
 import SignIn from "./page/signin";
-
-
+import VerifyEmail from "./page/verify";
 
 function App() {
   return (
@@ -18,6 +17,7 @@ function App() {
         <Route path="/auth" element={<AuthLayout />}>
           <Route path="login" element={<SignIn />} />
           <Route path="register" element={<SignUp />} />
+          <Route path="verify" element={<VerifyEmail />} />
         </Route>
       </Routes>
     </Router>
