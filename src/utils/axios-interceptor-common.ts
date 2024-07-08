@@ -19,8 +19,7 @@ const interceptors = {
     async (response: AxiosResponse) => {
       if (
         response.config.method?.toLocaleLowerCase() === "post" &&
-        ("/api/v1/users/sign_in" === response.config.url ||
-          "/api/v1/users" === response.config.url)
+        "/api/v1/users/sign_in" === response.config.url
       ) {
         saveToken(response.data?.data?.access_token);
       }

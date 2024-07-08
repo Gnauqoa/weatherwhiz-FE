@@ -17,6 +17,7 @@ import { AddUserType } from "../@types/user";
 import { useNavigate } from "react-router-dom";
 import { pathPage } from "../routes/path";
 import useToggle from "./useToggle";
+import { getError } from "../utils/getErrors";
 
 const useAuth = () => {
   const { isLoading, user, init } = useSelector((state) => state.user);
@@ -52,16 +53,10 @@ const useAuth = () => {
           type: "success",
         });
       } catch (err) {
-        const multipleErrors = (err as any).response?.data?.error?.errors;
         onSended();
-        toast(
-          multipleErrors
-            ? (err as any).response?.data?.error?.errors.join(".")
-            : (err as any).response?.data?.error,
-          {
-            type: "error",
-          }
-        );
+        toast(getError(err), {
+          type: "error",
+        });
       }
     },
     [onSended, onSending]
@@ -75,16 +70,10 @@ const useAuth = () => {
         toast("Verify email success! Please login.", { type: "success" });
         navigate(pathPage.login);
       } catch (err) {
-        const multipleErrors = (err as any).response?.data?.error?.errors;
         onVerified();
-        toast(
-          multipleErrors
-            ? (err as any).response?.data?.error?.errors.join(".")
-            : (err as any).response?.data?.error,
-          {
-            type: "error",
-          }
-        );
+        toast(getError(err), {
+          type: "error",
+        });
       }
     },
     [navigate, onVerified, onVerifying]
@@ -110,22 +99,20 @@ const useAuth = () => {
       dispatch(setUser(user.data.data));
       toast("Login success", { type: "success" });
     } catch (err) {
-      toast((err as any).response?.data?.error?.errors.join("."), {
+      toast(getError(err), {
         type: "error",
       });
     }
   };
   const register = async (data: AddUserType) => {
     try {
-      const res = await registerUser(data);
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${res.data.data.access_token}`;
-      const user = await axios.get("/api/v1/users/current");
-      dispatch(setUser(user.data.data));
-      toast("Register success", { type: "success" });
+      await registerUser(data);
+      navigate(pathPage.login);
+      toast("Register success, please check your mail box to verify email.", {
+        type: "success",
+      });
     } catch (err) {
-      toast((err as any).response?.data?.error?.errors.join("."), {
+      toast(getError(err), {
         type: "error",
       });
     }
