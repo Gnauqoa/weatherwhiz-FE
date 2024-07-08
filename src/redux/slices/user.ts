@@ -33,7 +33,9 @@ const slice = createSlice({
       state.init = true;
       state.user = { ...action.payload };
     },
-
+    initSuccess(state, action){
+      state.init = true
+    },
     // SET User
     setUserDetailSuccess(state, action: { payload: UserType }) {
       state.isLoading = false;
@@ -56,6 +58,7 @@ export function getUserDetail() {
       dispatch(slice.actions.getUserDetailSuccess(data.data));
     } catch (err) {
       dispatch(slice.actions.hasError(err));
+      dispatch(slice.actions.initSuccess(true))
     }
   };
 }

@@ -9,7 +9,7 @@ const RootLayout = () => {
   return (
     <div className="flex flex-col w-full h-screen overflow-auto justify-center items-center bg-[#E9E9E9] relative">
       <div className="absolute right-[5%] top-[5%]">
-        <IconButton onClick={logout}>
+        <IconButton onClick={() => logout()}>
           <LogoutIcon sx={{ color: "#101010" }} />
         </IconButton>
       </div>

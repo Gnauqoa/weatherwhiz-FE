@@ -10,17 +10,23 @@ import { AddUserType } from "../@types/user";
 const useAuth = () => {
   const { isLoading, user, init } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const logout = () => {
-    removeToken();
-    dispatch(setUser(null));
-    axios.defaults.headers.common["Authorization"] = null;
-    toast("Logout success", { type: "success" });
-  };
+
+  const logout = useCallback(
+    (isToast: boolean = true) => {
+      removeToken();
+      dispatch(setUser(null));
+      axios.defaults.headers.common["Authorization"] = null;
+      if (isToast) toast("Logout success", { type: "success" });
+    },
+    [dispatch]
+  );
+
   const initUser = useCallback(() => {
     if (!init && !isLoading) {
       dispatch(getUserDetail());
     }
-  }, [init, isLoading, dispatch]);
+    if (init && !isLoading && !user) logout(false);
+  }, [init, isLoading, dispatch, user, logout]);
   const getUser = () => {
     if (!isLoading) dispatch(getUserDetail());
   };
