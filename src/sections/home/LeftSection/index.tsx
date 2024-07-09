@@ -10,7 +10,7 @@ const FirstSection = () => {
     <div className="flex flex-col space-between h-full">
       <Header />
       {isLoading ? (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col h-full w-full justify-center items-center">
           <CircularProgress size={100} sx={{ width: 100, height: 100 }} />
         </div>
       ) : (
