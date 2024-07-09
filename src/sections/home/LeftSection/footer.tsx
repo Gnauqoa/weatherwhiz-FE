@@ -6,7 +6,7 @@ const Footer = () => {
 
   if (!data) return <></>;
   return (
-    <div className="flex flex-row items-center justify-center gap-4 w-full">
+    <div className="flex flex-row items-center gap-4 w-full hide-scrollbars overflow-auto">
       <DayCard current={true} {...data.current} id="current" />
       {data.forecast.forecastday.slice(1).map((forecastday, index) => (
         <DayCard
