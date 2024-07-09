@@ -52,7 +52,7 @@ const UpdateNotifyModal = ({
       <div className="flex flex-col bg-[#fff] w-[500px] px-3 py-3 gap-4">
         <div className="flex flex-row items-center">
           <Typography sx={{ fontSize: 16, fontWeight: 600, color: "#101010" }}>
-            Subscribe Modal
+            Subscribe for Weather Information{" "}
           </Typography>
           <IconButton onClick={onClose} sx={{ ml: "auto" }}>
             <CloseIcon />
