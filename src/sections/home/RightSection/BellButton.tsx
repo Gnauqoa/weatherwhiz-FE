@@ -19,7 +19,9 @@ const BellButton = () => {
       ) : (
         <IconButton onClick={!user.notification_each_day ? onOpen : onUnSub}>
           {user.notification_each_day ? (
-            <NotificationsIcon sx={{ width: 32, height: 32 }} />
+            <NotificationsIcon
+              sx={{ width: 32, height: 32, color: "#101010" }}
+            />
           ) : (
             <NotificationsOffIcon sx={{ width: 32, height: 32 }} />
           )}

@@ -18,25 +18,26 @@ const CurrentWeather = () => {
   if (!hourSelected || !user) return <></>;
   return (
     <div className="flex flex-col w-full items-center py-4 gap-3 relative">
-      <div className="absolute top-3 right-3">
-        <BellButton />
+      <div className="flex flex-row items-center px-4">
+        <Typography
+          sx={{
+            color: "#060606",
+            fontSize: 30,
+            fontWeight: 300,
+            mr: 3
+          }}
+        >
+          {greeting},<span className="font-[600]">{user.last_name}</span>
+        </Typography>
+        <div className="ml-auto">
+          <BellButton />
+        </div>
       </div>
-      <Typography
-        sx={{
-          color: "#060606",
-          fontSize: 30,
-          fontWeight: 300,
-          textAlign: "center",
-          px: 3,
-        }}
-      >
-        {greeting},<span className="font-[600]">{user.last_name}</span>
-      </Typography>
       <Typography sx={{ color: "#060606", fontSize: 30 }}>
         {dayjs(hourSelected.time).format("h:mm A")}
       </Typography>
       <div className="flex flex-col items-center w-full justify my-auto gap-3">
-        <div className="flex flex-row gap-4  items-center">
+        <div className="flex flex-row gap-4 items-center">
           <Typography sx={{ fontSize: 64, color: "#696969" }}>
             {hourSelected.temp_c.toFixed(0)}&deg;
           </Typography>
