@@ -10,6 +10,7 @@ import { Button, CircularProgress } from "@mui/material";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { pathPage } from "../routes/path";
+import AuthContainer from "../sections/auth/AuthContainer";
 
 export const VerifyEmailSchema = yup.object().shape({
   code: yup.string().required("Please enter code"),
@@ -37,7 +38,7 @@ const VerifyEmail = () => {
   }, [code, user_id]);
 
   return (
-    <div className="flex flex-col bg-[#FAFAFA] px-6 py-8 rounded-[12px] w-[30%]">
+    <AuthContainer>
       <div className="w-full flex pb-4 flex-col items-center">
         <Logo />
       </div>
@@ -96,7 +97,7 @@ const VerifyEmail = () => {
           Sign In
         </Link>
       </p>
-    </div>
+    </AuthContainer>
   );
 };
 

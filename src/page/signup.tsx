@@ -10,6 +10,7 @@ import Logo from "../components/Logo";
 import { Link } from "react-router-dom";
 import { pathPage } from "../routes/path";
 import { AddUserType } from "../@types/user";
+import AuthContainer from "../sections/auth/AuthContainer";
 
 export const SignUpSchema = yup.object().shape({
   email: yup
@@ -48,7 +49,7 @@ const SignUp = () => {
   const { handleSubmit } = methods;
 
   return (
-    <div className="flex flex-col bg-[#FAFAFA] gap-4   px-6 py-8 rounded-[12px] w-[30%]">
+    <AuthContainer>
       <div className="w-full flex flex-col items-center">
         <Logo />
       </div>
@@ -102,7 +103,7 @@ const SignUp = () => {
           </p>
         </div>
       </FormProvider>
-    </div>
+    </AuthContainer>
   );
 };
 
