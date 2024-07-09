@@ -1,14 +1,20 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "../redux/store";
 import { removeToken } from "../utils/local-storage";
-import { getUserDetail, setUser } from "../redux/slices/user";
+import {
+  getUserDetail,
+  setUser,
+  updateNotifyWeather,
+} from "../redux/slices/user";
 import {
   SendVerifyCodeFormProps,
   SignInFormProps,
+  UpdateNotifyWeatherFormProps,
   VerifyEmailFormProps,
   registerUser,
   sendVerifyCodeAPI,
   signIn,
+  updateNotifyWeatherAPI,
   verifyEmail,
 } from "../apis/auth";
 import { toast } from "react-toastify";
@@ -31,9 +37,28 @@ const useAuth = () => {
     onClose: onSended,
     onOpen: onSending,
   } = useToggle();
+
+  const {
+    toggle: isUpdateNotify,
+    onClose: onUpdatedNotify,
+    onOpen: onUpdatingNotify,
+  } = useToggle();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const updateNotifyData = useCallback(
+    async (payload: UpdateNotifyWeatherFormProps) => {
+      try {
+        onUpdatingNotify();
+        const { data } = await updateNotifyWeatherAPI(payload);
+        dispatch(setUser(data.data));
+        onUpdatedNotify();
+        toast(payload?.notification_each_day ? "Subscribe success!" : "Unsubscribe success!", { type: "success" });
+      } catch (err) {
+        onUpdatedNotify();
+      }
+    },
+    [onUpdatedNotify, onUpdatingNotify, dispatch]
+  );
   const logout = useCallback(
     (isToast: boolean = true) => {
       removeToken();
@@ -124,7 +149,9 @@ const useAuth = () => {
     getUser,
     initUser,
     register,
+    updateNotifyData,
     sendVerifyCode,
+    isUpdateNotify,
     isSendVerifyCode,
     isVerify,
     init,

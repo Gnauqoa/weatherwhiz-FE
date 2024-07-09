@@ -4,6 +4,7 @@ import useForecast from "../../../hooks/useForecast";
 import wind from "../../../assets/wind.svg";
 import drink from "../../../assets/drink.svg";
 import useAuth from "../../../hooks/useAuth";
+import BellButton from "./BellButton";
 
 const currentHour = dayjs().hour();
 let greeting = "";
@@ -16,7 +17,10 @@ const CurrentWeather = () => {
   const { user } = useAuth();
   if (!hourSelected || !user) return <></>;
   return (
-    <div className="flex flex-col w-full items-center py-4 gap-3">
+    <div className="flex flex-col w-full items-center py-4 gap-3 relative">
+      <div className="absolute top-3 right-3">
+        <BellButton />
+      </div>
       <Typography
         sx={{
           color: "#060606",

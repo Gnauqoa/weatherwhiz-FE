@@ -1,3 +1,4 @@
+import { UpdateNotifyWeatherFormProps, updateNotifyWeatherAPI } from "./../../apis/auth";
 import { createSlice } from "@reduxjs/toolkit";
 import { dispatch } from "../store";
 import { ReducerType } from "../../@types/request";
@@ -33,8 +34,8 @@ const slice = createSlice({
       state.init = true;
       state.user = { ...action.payload };
     },
-    initSuccess(state, action){
-      state.init = true
+    initSuccess(state, action) {
+      state.init = true;
     },
     // SET User
     setUserDetailSuccess(state, action: { payload: UserType }) {
@@ -58,7 +59,19 @@ export function getUserDetail() {
       dispatch(slice.actions.getUserDetailSuccess(data.data));
     } catch (err) {
       dispatch(slice.actions.hasError(err));
-      dispatch(slice.actions.initSuccess(true))
+      dispatch(slice.actions.initSuccess(true));
+    }
+  };
+}
+
+export function updateNotifyWeather(payload: UpdateNotifyWeatherFormProps) {
+  return async () => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const { data } = await updateNotifyWeatherAPI(payload);
+      dispatch(slice.actions.getUserDetailSuccess(data.data));
+    } catch (err) {
+      dispatch(slice.actions.hasError(err));
     }
   };
 }

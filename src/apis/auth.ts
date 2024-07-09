@@ -7,6 +7,10 @@ import {
   UpdateUserPayload,
 } from "../@types/user";
 
+export type UpdateNotifyWeatherFormProps = {
+  q?: string | undefined;
+  notification_each_day?: boolean | undefined;
+};
 export type SignInFormProps = {
   email: string;
   password: string;
@@ -17,7 +21,7 @@ export type VerifyEmailFormProps = {
 };
 export type SendVerifyCodeFormProps = {
   user_id: string;
-}
+};
 export const signIn = (payload: SignInFormProps): Promise<AxiosResponse> => {
   return axios.post("/api/v1/users/sign_in", {
     account: payload.email,
@@ -50,5 +54,11 @@ export const verifyEmail = (
 };
 
 export const sendVerifyCodeAPI = (payload: SendVerifyCodeFormProps) => {
-  return axios.post(`/api/v1/users/verify/${payload.user_id}`)
-}
+  return axios.post(`/api/v1/users/verify/${payload.user_id}`);
+};
+
+export const updateNotifyWeatherAPI = (
+  payload: UpdateNotifyWeatherFormProps
+) => {
+  return axios.put(`/api/v1/users/notification_weather`, payload);
+};

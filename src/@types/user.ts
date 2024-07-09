@@ -18,6 +18,9 @@ export type UserTypeNotNull = {
   avatar_url: string;
   created_at: string;
   updated_at: string;
+  notification_each_day: boolean;
+  location_id: string;
+  location_query: string;
 };
 export type UpdateUserPayload = {
   first_name?: string;
