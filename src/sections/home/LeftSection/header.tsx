@@ -42,7 +42,14 @@ const Day = () => {
   return (
     <div onClick={onOpen} className="cursor-pointer">
       <Typography sx={{ fontSize: 28, fontWeight: 300, color: "#101010" }}>
-        in <span className="font-[600]">{days}</span> days
+        {Number(days) > 1 ? (
+          <>
+            for the next{" "}
+            <span className="font-[600]">{days}</span> days
+          </>
+        ) : (
+          "today"
+        )}
       </Typography>
     </div>
   );
