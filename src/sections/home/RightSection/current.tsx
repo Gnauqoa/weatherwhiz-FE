@@ -16,8 +16,16 @@ const CurrentWeather = () => {
   const { user } = useAuth();
   if (!hourSelected || !user) return <></>;
   return (
-    <div className="flex flex-col w-full h-[50%] items-center py-4 gap-3">
-      <Typography sx={{ color: "#060606", fontSize: 30, fontWeight: 300 }}>
+    <div className="flex flex-col w-full items-center py-4 gap-3">
+      <Typography
+        sx={{
+          color: "#060606",
+          fontSize: 30,
+          fontWeight: 300,
+          textAlign: "center",
+          px: 3,
+        }}
+      >
         {greeting},<span className="font-[600]">{user.last_name}</span>
       </Typography>
       <Typography sx={{ color: "#060606", fontSize: 30 }}>
