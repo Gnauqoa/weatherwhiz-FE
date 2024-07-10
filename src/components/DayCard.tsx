@@ -23,13 +23,13 @@ const DayCard = (props: DayCardProps) => {
       <Typography sx={{ color: "#101010", fontSize: 16, fontWeight: 600 }}>
         {props.current ? "To day" : dayjs(props.time).format("ddd")}
       </Typography>
-      <Typography sx={{ fontSize: 28, color: "#101010" }}>
+      <p className="text-[14px] text-[#101010] xl:text-[28px]">
         {props.temp_c.toFixed(0)}&deg;
-      </Typography>
+      </p>
       <Typography
         sx={{
           color: "#BDBDBD",
-          mt: "auto",
+
           fontWeight: 500,
           textAlign: "center ",
         }}

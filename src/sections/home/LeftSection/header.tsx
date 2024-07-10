@@ -17,7 +17,7 @@ const Header = () => {
     </div>
   );
 };
-const Day = () => {
+export const Day = () => {
   const { toggle, onOpen, onClose } = useToggle();
   const { search, days, q } = useForecast();
   if (toggle)
@@ -54,7 +54,7 @@ const Day = () => {
     </div>
   );
 };
-const Search = () => {
+export const Search = () => {
   const { q, days, search } = useForecast();
   const [query, setQuery] = useState("");
   const { toggle: isSearch, onOpen, onClose } = useToggle();
