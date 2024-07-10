@@ -69,6 +69,7 @@ export function getForecastData({ q, days }: { q: string; days: string }) {
     try {
       const { data } = await getForecastAPI({ q, days });
       dispatch(slice.actions.setForecastData(data.data));
+      return data
     } catch (err) {
       dispatch(slice.actions.hasError(err));
     }

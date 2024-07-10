@@ -7,6 +7,8 @@ import {
 } from "../redux/slices/forecast";
 import { DayCardProps } from "../components/DayCard";
 import { Hour } from "../@types/weather/forecast";
+import { toast } from "react-toastify";
+import { FunctionBase } from "lodash";
 
 const useForecast = () => {
   const { q, days, data, isLoading, currentSelected, currentHourIndex } =
@@ -14,7 +16,9 @@ const useForecast = () => {
   const hourSelected: Hour | null = data
     ? currentSelected === "current"
       ? data.forecast.forecastday[0].hour[currentHourIndex]
-      : data.forecast.forecastday[Number(currentSelected.split("-")[1])].hour[currentHourIndex]
+      : data.forecast.forecastday[Number(currentSelected.split("-")[1])].hour[
+          currentHourIndex
+        ]
     : null;
   const daySelected: DayCardProps | null = data
     ? currentSelected === "current"
@@ -34,8 +38,9 @@ const useForecast = () => {
     dispatch(setCurrentSelected(id));
   };
   const search = useCallback(
-    async (q: string, days: string) => {
-      dispatch(getForecastData({ q, days }));
+    async (q: string, days: string, callback?: Function) => {
+      await dispatch(getForecastData({ q, days }));
+      if (callback) callback();
     },
     [dispatch]
   );

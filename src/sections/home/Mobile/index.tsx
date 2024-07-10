@@ -7,6 +7,8 @@ import useAuth from "../../../hooks/useAuth";
 import BellButton from "../RightSection/BellButton";
 import Days from "./days";
 import Hours from "./hours";
+import useToggle from "../../../hooks/useToggle";
+import Modal from "./modal";
 
 const currentHour = dayjs().hour();
 let greeting = "";
@@ -14,9 +16,10 @@ if (currentHour < 12) greeting = "Good morning";
 else if (currentHour < 18) greeting = "Good afternoon";
 else greeting = "Good evening";
 
-const   Mobile = () => {
-  const { hourSelected, days } = useForecast();
+const Mobile = () => {
+  const { hourSelected, days, q } = useForecast();
   const { user } = useAuth();
+  const { toggle, onClose, onOpen } = useToggle();
 
   if (!hourSelected || !user) return <></>;
   return (
@@ -39,16 +42,21 @@ const   Mobile = () => {
       <Typography sx={{ color: "#060606", fontSize: 30 }}>
         {dayjs(hourSelected.time).format("h:mm A")}
       </Typography>
-      <div className="flex flex-row gap-1 items-center w-full justify-center">
+      <Modal open={toggle} onClose={onClose} />
+      <div
+        className="flex flex-row gap-1 items-center w-full justify-center"
+        onClick={onOpen}
+      >
         <Typography
           sx={{
             fontSize: 18,
             fontWeight: 300,
             color: "#101010",
             textAlign: "center",
+            cursor: "pointer",
           }}
         >
-          Weather in <span className="font-[600]">Viet Nam</span>{" "}
+          Weather in <span className="font-[600]">{q}</span>{" "}
           {Number(days) > 1 ? (
             <>
               for the next <span className="font-[600]">{days}</span> days

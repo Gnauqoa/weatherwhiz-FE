@@ -49,7 +49,7 @@ const UpdateNotifyModal = ({
   };
   return (
     <Dialog open={open} onClose={onClose}>
-      <div className="flex flex-col bg-[#fff] w-[500px] px-3 py-3 gap-4">
+      <div className="flex flex-col bg-[#fff] w-full xl:w-[500px] px-3 py-3 gap-4">
         <div className="flex flex-row items-center">
           <Typography sx={{ fontSize: 16, fontWeight: 600, color: "#101010" }}>
             Subscribe for Weather Information{" "}
