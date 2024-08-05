@@ -123,6 +123,7 @@ const useAuth = () => {
       const user = await axios.get("/users/current");
       dispatch(setUser(user.data.data));
       toast("Login success", { type: "success" });
+      navigate(pathPage.root);
     } catch (err) {
       toast(getError(err), {
         type: "error",
