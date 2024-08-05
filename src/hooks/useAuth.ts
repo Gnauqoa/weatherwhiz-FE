@@ -120,7 +120,7 @@ const useAuth = () => {
       axios.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${res.data.data.access_token}`;
-      const user = await axios.get("/api/v1/users/current");
+      const user = await axios.get("/users/current");
       dispatch(setUser(user.data.data));
       toast("Login success", { type: "success" });
     } catch (err) {

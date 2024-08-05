@@ -30,14 +30,14 @@ export const SignUpSchema = yup.object().shape({
   birth: yup.string().required("Please enter birth"),
 });
 export const defaultValues = {
-  email: "",
-  username: "",
-  first_name: "",
-  last_name: "",
-  phone: "",
-  password: "",
-  confirm_password: "",
-  birth: "",
+  email: "quanglng2022@gmail.com",
+  username: "quang",
+  first_name: "Le",
+  last_name: "Dang Qaung",
+  phone: "03859129050",
+  password: "quang123",
+  confirm_password: "quang123",
+  birth: "08/10/2003",
 };
 
 const SignUp = () => {

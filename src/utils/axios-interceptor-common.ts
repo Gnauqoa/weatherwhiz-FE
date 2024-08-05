@@ -17,10 +17,12 @@ const interceptors = {
   ],
   response: [
     async (response: AxiosResponse) => {
+      console.log(response.config.url)
       if (
         response.config.method?.toLocaleLowerCase() === "post" &&
-        "/api/v1/users/sign_in" === response.config.url
+        response.config.url?.includes("users/sign_in") 
       ) {
+        console.log("save token")
         saveToken(response.data?.data?.access_token);
       }
       return response;
@@ -29,7 +31,7 @@ const interceptors = {
   error: [
     (error: AxiosError) => {
       if (error.response?.status === 401) {
-        if (error.response.config.url !== "/api/v1/users/current") {
+        if (error.response.config.url !== "/users/current") {
         }
       }
       throw error;
